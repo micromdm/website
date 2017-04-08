@@ -1,0 +1,4 @@
+languageCode = "en-us"
+title = "MicroMDM"
+baseurl = "https://micromdm.io/"
+canonifyUrls = false
