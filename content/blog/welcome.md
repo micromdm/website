@@ -7,15 +7,15 @@ frontpage = true
 
 +++
 
-I first [wrote](https://groob.io/posts/mdm-experiments/) about experimenting with MDM at the end of 2015. Since then, Apple has made the MDM specification [public](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html), many administrators are looking to swap imaging devices for a DEP workflow, and even commercial vendors [are taking notice](https://simplemdm.com/2017/03/07/deploy-munki-apple-dep-mdm/) of the [needs](http://blog.eriknicolasgomez.com/2017/03/08/Custom-DEP-Part-1-An-Introduction/) of our community. One thing has become increasingly clear - MDM will play a critical role in the future of managing Apple devices in the enterprise. And with the renewed interest in MDM from the macadmin community, it's only fair to be asked -- What is the future of the MicroMDM project?   <!--more-->
+I first [wrote](https://groob.io/posts/mdm-experiments/) about experimenting with MDM at the end of 2015. Since then, Apple has made the MDM specification [public](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html), many administrators are looking to swap imaging devices for a DEP workflow, and even commercial vendors [are taking notice](https://simplemdm.com/2017/03/07/deploy-munki-apple-dep-mdm/) of the [needs](http://blog.eriknicolasgomez.com/2017/03/08/Custom-DEP-Part-1-An-Introduction/) of our community. One thing has become increasingly clear — MDM will play a critical role in the future of managing Apple devices in the enterprise. And with the renewed interest in MDM from the macadmin community, it's only fair to be asked — What is the future of the MicroMDM project?   <!--more-->
 
 # Growing the community
 
-Last summer I met Jesse Petterson at the Penn State Macadmins conference. Jesse is one of the [pioneers](https://github.com/jessepeterson/commandment) in developing an open source MDM project, and has helped me figure out a lot of the initial hurdles to get MicroMDM up and running. We've had a lot of opportunities to chat about [what features we'd like to see](https://github.com/micromdm/micromdm/issues/110) in an MDM server, and how to make the project easy to get started for new users. 
+Last summer I met Jesse Peterson at the Penn State Macadmins conference. Jesse is one of the [pioneers](https://github.com/jessepeterson/commandment) in developing an open source MDM project, and has helped me figure out a lot of the initial hurdles to get MicroMDM up and running. We've had a lot of opportunities to chat about [what features we'd like to see](https://github.com/micromdm/micromdm/issues/110) in an MDM server, and how to make the project easy to get started for new users. 
 
 Jesse and I will be speaking about MDM and DEP at a number of Mac conferences this year, starting with [macdevops::YVR](https://www.macdevops.ca/speakers/) in June. 
 
-If you're interested in the project, follow [@micromdm_io](https://twitter.com/micromdm_io) on Twitter or join the discussion on [Slack](https://macadmins.herokuapp.com/).
+If you're interested in the project, follow [@micromdm_io](https://twitter.com/micromdm_io) on Twitter or join the discussion on the [MacAdmins Slack](https://macadmins.herokuapp.com/) in the `#micromdm` channel.
 
 # Focus on user needs
 
