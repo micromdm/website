@@ -30,7 +30,7 @@ If you're just applying now, keep this timeline in mind:
 
 # Create your Apple IDs
 
-Apple will require you to create an AppleID for each account you create. If you're creating accounts on behalf of a company, it's important to remmember you might not be the only one accessing it, and that one day you might leave and someone else will inherit that account. With that in mind, I went the route of creating a group in Gmail which has several aliases -- one for each administrative Apple ID.
+Apple will require you to create an AppleID for each account you create. If you're creating accounts on behalf of a company, it's important to remember you might not be the only one accessing it, and that one day you might leave and someone else will inherit that account. With that in mind, I went the route of creating a group in Gmail which has several aliases -- one for each administrative Apple ID.
 
 # Sign up for an Enterprise Developer Account
 
