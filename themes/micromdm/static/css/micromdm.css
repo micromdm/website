@@ -77,3 +77,7 @@ pre {
     border-radius: 7px;
 }
 
+
+.screenshot img {
+    width: 100%;
+}
