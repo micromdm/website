@@ -63,9 +63,9 @@ Once you have an MDM APNs certificate you may then send push notifications to de
 
 * MDM APNs certificates **expire yearly.** This of course means you'll need to renew the certificate with a similar process you followed to get the original certificate. Note that it **must be a renewal** and not a *new* APNs push certificate for a very important reason:
 * The APNs Push "topic" (which is embedded in the push certificate and has a `com.apple.mgmt.` prefix for MDM) **can never change for the life of a device's enrollment.** Basically, this means a couple things:
- * You can't just use *any* MDM APNs certificate; they're not interchangeable. When devices enroll into an MDM they are tied to that particular APNs certificate push topic.
- * This is why a *new* certificate can't be used as a renewal — said new certificate would have a different Push topic and would not be able to be used for sending push notifications to your existing enrolled devices. When you renew the certificate on identity.apple.com it must be submitted as a Renewal to a previously created certificate. This doesn't mean you have to use the same private key (which is bad practice), just that it is submitted as a renewal to Apple.
- * If you're using the Server.app extraction method you'll want to keep that instance of Server.app (computer/VM) around so that you can fire it up to get the push certificate with the same topic renewed and exracted again. But hopefully you're only using that method as a test and not necessarily as your production MDM certificate.
+  * You can't just use *any* MDM APNs certificate; they're not interchangeable. When devices enroll into an MDM they are tied to that particular APNs certificate push topic.
+  * This is why a *new* certificate can't be used as a renewal — said new certificate would have a different Push topic and would not be able to be used for sending push notifications to your existing enrolled devices. When you renew the certificate on identity.apple.com it must be submitted as a Renewal to a previously created certificate. This doesn't mean you have to use the same private key (which is bad practice), just that it is submitted as a renewal to Apple.
+  * If you're using the Server.app extraction method you'll want to keep that instance of Server.app (computer/VM) around so that you can fire it up to get the push certificate with the same topic renewed and exracted again. But hopefully you're only using that method as a test and not necessarily as your production MDM certificate.
 * As with any certificate take note of what format the APNs certificate & key are in. Is it two separate PEM-encoded certificate and key files? Is it a single PKCS#12 file encrypted with a password? Knowing these details will be crucial to getting MicroMDM (or any MDM) up and running with them.
 
 # Device Identity certificate
@@ -119,7 +119,7 @@ This means that the types of a certificates you can use are pretty much the same
 
 * A purchased TLS/SSL certificate from a reputable Certificate Authority provider like e.g. [Comodo](https://www.comodo.com/), [GlobalSign](https://www.globalsign.com/en/), [Entrust](https://www.entrust.com/), etc.
 * MicroMDM supports [LetsEncrypt](https://letsencrypt.org/) (LE) certificate acquisition for automatic SSL configuration
- * Note per usual LE operation this requires public internet inbound TCP port 443 access to your MDM server and properly working public DNS
+  * Note per usual LE operation this requires public internet inbound TCP port 443 access to your MDM server and properly working public DNS
 * Using a [self-signed](https://en.wikipedia.org/wiki/Self-signed_certificate) (or private CA-signed) certificate
 
 If self-signed or private CA-signed certificates are used then we must add those certificates to our enrollment profile using the appropriate configuration profile payloads as mentioned above. MicroMDM does this for us.
