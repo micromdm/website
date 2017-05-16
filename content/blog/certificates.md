@@ -7,9 +7,11 @@ title = "Understanding MDM Certificates"
 
 +++
 
-MDM requires the use of [digital certificates](https://en.wikipedia.org/wiki/Public_key_certificate); that much most of us know. However the various different certificates and the various ways in which they are generated, acquired, signed, and used with an MDM product may not be so clear. Generally an MDM service provider/vendor manages most of the complexity related to these certificates for you but in the case of an open source MDM that responsibility will land on you. In this post I hope to bring a better understanding of these certificates with the aim that you'll be managing them yourself.
+MDM requires the use of various digital certificates for its operation. However exactly which certificates and the various ways in which they are generated, acquired, signed, used, exported, imported, and managed within an MDM product may not be so clear. Generally speaking a commercial MDM product or service manages most of the complexity related to these certificates for you but in the case of an open source MDM much of that responsibility will land on you. In this post I hope to bring a better understanding of these certificates with the aim that you'll be managing at least a few of them yourself.
 
 <!--more-->
+
+This post assumes you have at least a basic familiarity of working with certificates, private keys, certificate authorities and the like. To learn more about these and the TLS/SSL protocols have a look at this [TLS & Certificate Survival Guide](http://www.zytrax.com/tech/survival/ssl.html).
 
 # Apple Push Notification service certificate
 
@@ -23,13 +25,13 @@ There's a few different options for acquiring an MDM push certificate and each c
 
 ### Method A: Roll your own using an MDM Vendor Certificate
 
-An *MDM Vendor Certificate* is a special certificate that can sign *other MDM APNs certificate requests* to then subsequently submit to Apple. This certificate option is only available to members of the [Apple Developer Enterprise Program](https://developer.apple.com/programs/enterprise/) which costs US$300/year. Victor Vrantchan talked about signing up for this account (and this specific certificate option) in [this blog post](/blog/accounts/).
+An *MDM Vendor Certificate* (or MDM CSR certificate) is a special certificate that can sign *other MDM APNs certificate requests* that can then subsequently be submitted to Apple for signing. This certificate option is only available to members of the [Apple Developer Enterprise Program](https://developer.apple.com/programs/enterprise/) which costs US$300/year. Victor Vrantchan talks about signing up for this account (and this specific certificate option) in [this blog post](/blog/accounts/).
 
 This method is probably the most complicated option (due to the two-step nature of the certificates) and certainly the most expensive. However a developer account is a good resource for any Mac admin anyway, as Victor mentions, and this is probably the most Apple-supported option for hosting your own MDM as you're not beholden to any other entity or software than Apple for your certificates. This is the same method a commercial MDM vendor uses to generate certificates for their customers (and hence explains the two-step signing process — typically an actual MDM user/admin wouldn't be doing the "Vendor" steps).
 
 The high-level overview of getting and using a push certificate with a Vendor certificate is similar to this:
 
-1. Sign up for an Enterprise account and request the `MDM CSR` on the account (see [this blog post](/blog/accounts/))
+1. Sign up for an Enterprise account and request the `MDM CSR` certificate on the account (see [this blog post](/blog/accounts/))
 1. Create a private key and an MDM CSR Vendor Certificate in the Apple portal
 2. Once you have the MDM CSR Vendor certificate now generate another, separate "customer" or "end-user" certificate request.
 3. This "customer" certificate request needs to be wrapped up and signed into a special format by the MDM Vendor certificate.
@@ -45,7 +47,7 @@ Once the final "customer" push certificates are created and exported from Apple 
 
 This technique was probably first documented in 2011 as a part of [David Shuetz Black Hat 2011 presentation "Inside Apple’s MDM Black Box."](https://www.youtube.com/watch?v=OifARLlRMyU). [Page seven of his PDF](https://media.blackhat.com/bh-us-11/Schuetz/BH_US_11_Schuetz_InsideAppleMDM_WP.pdf) documents exporting the PKCS#12 certificate & key from Keychain Access.app once you've [turned on Profile Manager](https://help.apple.com/serverapp/mac/5.3/#/apd05B9B761-D390-4A75-9251-E9AD29A61D0C). The [MicroMDM Quickstart guide](https://github.com/micromdm/micromdm/wiki/Quickstart#getting-an-mdm-push-certificate) also has some documentation on getting at this certificate.
 
-If you just want to try out MicroMDM or other Open Source MDM solutions this is likely the easiest and quickest way to get an APNs push certificate. The downside is that it is an Apple-proprietary method of getting this certificate that's embedded inside Profile Manager. This probably makes it of questionable legality to use with anything other than Profile Manager. As well there is a nominal cost associated.
+If you just want to try out MicroMDM (or another Open Source MDM solution) this is likely the easiest and quickest way to get an APNs push certificate. The downside is that it is an Apple-proprietary method of getting this certificate that's embedded inside Profile Manager. This probably makes it of questionable legality to use with anything other than Profile Manager. As well there is a nominal cost associated.
 
 Once the Profile Manager certificate is exported as a `.p12` file it can be used directly with MicroMDM.
 
@@ -142,4 +144,6 @@ That's what the DEP anchor certificates are for. There's a special property on t
 
 # Conclusion
 
-My hope is this overview has been helpful in untangling the various certificates used in the MDM protocol and perhaps sheds some light on some of the nuances and gotchas surrounding them. Thanks!
+My hope is this overview has been helpful in untangling the various certificates used in the MDM protocol and perhaps sheds some light on some of the nuances and gotchas surrounding them.
+
+But even so if you've still got questions or are having trouble working with any of these certificates come join us in the MDM-related [MacAdmins Slack channels](/) where we discuss topics like this.
