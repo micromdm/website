@@ -25,7 +25,7 @@ There's a few different options for acquiring an MDM push certificate and each c
 
 An *MDM Vendor Certificate* is a special certificate that can sign *other MDM APNs certificate requests* to then subsequently submit to Apple. This certificate option is only available to members of the [Apple Developer Enterprise Program](https://developer.apple.com/programs/enterprise/) which costs US$300/year. Victor Vrantchan talked about signing up for this account (and this specific certificate option) in [this blog post](/blog/accounts/).
 
-This method is probably the most complicated option (due to the two-step nature of the certificates) and certainly the most expensive. However a developer account is a good resource for any Mac admin anyway, as Victor mentions, and this is probably the most Apple-supported option for hosting your own MDM as you're not beholden to any other entity or software than Apple for your certificates.
+This method is probably the most complicated option (due to the two-step nature of the certificates) and certainly the most expensive. However a developer account is a good resource for any Mac admin anyway, as Victor mentions, and this is probably the most Apple-supported option for hosting your own MDM as you're not beholden to any other entity or software than Apple for your certificates. This is the same method a commercial MDM vendor uses to generate certificates for their customers (and hence explains the two-step signing process — typically an actual MDM user/admin wouldn't be doing the "Vendor" steps).
 
 The high-level overview of getting and using a push certificate with a Vendor certificate is similar to this:
 
@@ -72,10 +72,10 @@ Once you have an MDM APNs certificate you may then send push notifications to de
 
 An MDM device enrolls with an identity certificate & key pair. This certificate and private key can either be outright *given* to the device or the device can request that a new certificate be signed on its behalf.
 
-The former is done by embedding a PKCS#12 profile payload in the enrollment profile. This will become the device's identity certificate. The latter is done by the device using the SCEP protocol to request for a certificate to be signed. Using the SCEP protocol, for all its faults, is much more secure for a few reasons:
+The former is done by embedding a PKCS#12 profile payload in the enrollment profile. This will become the device's identity certificate. The latter is done by the device by itself using the SCEP protocol to request a certificate to be signed. Using the SCEP protocol, for all its faults, is much more secure for a few reasons:
 
-1. The private key is not transferred over the network like the embedded method
-2. The private key is not hanging around in an enrollment profile which may be exported or shared
+1. The private key is not transferred over the network like the 'embedded' method
+2. The private key is not hanging around in an enrollment profile which may be inadvertantly exported, shared, or lost
 3. Each device has a unique certificate and private key generated for it to use.
 
 The primary use of this device identity certificate is to authenticate the device to the MDM server whenever an HTTPS connection is made. Depending on how the MDM software is configured and how the enrollment profile are setup the device either performs [TLS/SSL client authentication](https://en.wikipedia.org/wiki/Client_certificate) or it provides a [CMS](https://en.wikipedia.org/wiki/Cryptographic_Message_Syntax) detached signature of the MDM request using its identity key pair. In either case this cryptographically proves that the device is using a certificate that should be known to the MDM server.
