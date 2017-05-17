@@ -7,7 +7,7 @@ title = "Understanding MDM Certificates"
 
 +++
 
-MDM requires the use of various digital certificates for its operation. However exactly which certificates and the various ways in which they are generated, acquired, signed, used, exported, imported, and managed within an MDM product may not be so clear. Generally speaking a commercial MDM product or service manages most of the complexity related to these certificates for you but in the case of an open source MDM much of that responsibility will land on you. In this post I hope to bring a better understanding of these certificates with the aim that you'll be managing at least a few of them yourself.
+Mobile Device Management (MDM) requires the use of various digital certificates for its operation. But exactly which certificates and the various ways in which they are generated, acquired, signed, used, exported, imported, and managed within an MDM product may not be so clear. Generally speaking a commercial MDM product or service manages most of the complexity related to these certificates for you but in the case of an open source MDM much of that responsibility will land on you. In this post I hope to bring a better understanding of these certificates with the aim that you'll be managing at least a few of them yourself.
 
 <!--more-->
 
@@ -21,7 +21,7 @@ However not just anybody can send these push notifications to Apple (and in turn
 
 ## Getting an MDM APNs certificate
 
-There's a few different options for acquiring an MDM push certificate and each comes with its own pros and cons.
+There are a few different options for acquiring an MDM push certificate and each has its own pros and cons.
 
 ### Method A: Roll your own using an MDM Vendor Certificate
 
@@ -35,7 +35,7 @@ The high-level overview of getting and using a push certificate with a Vendor ce
 1. Create a private key and an MDM CSR Vendor Certificate in the Apple portal
 2. Once you have the MDM CSR Vendor certificate now generate another, separate "customer" or "end-user" certificate request.
 3. This "customer" certificate request needs to be wrapped up and signed into a special format by the MDM Vendor certificate.
-4. This signed request must then be uploaded to [identity.apple.com](https://idmsa.apple.com/) where Apple will issue the final actual push certificate that be used in conjunction with the private key for sending APNs MDM push notifications.
+4. This signed request must then be uploaded to [identity.apple.com](https://idmsa.apple.com/) where Apple will issue the final actual push certificate that is used in conjunction with the private key for sending APNs MDM push notifications.
 
 This process is also covered here in [Pepijn Bruienne's blog post](http://enterprisemac.bruienne.com/2015/06/06/mdm-azing-setting-up-your-own-mdm-server/). As well for actually working with these certificates [micromdm's certhelper tool](https://github.com/micromdm/tools) has documentation on getting started once all the Apple account details have been taken care of.
 
@@ -43,7 +43,7 @@ Once the final "customer" push certificates are created and exported from Apple 
 
 ### Method B: Export a Profile Manager certificate
 
-*Profile Manager* is Apple's reference MDM product (or proof-of-concept, depending on how jaded you are about it). It's bundled with [macOS Server.app](https://itunes.apple.com/us/app/macos-server/id883878097?mt=12) for US$20 and requires macOS (or a VM running it). It has a neat feature where, with only an Apple ID it can submit a certificate request to Apple, have an MDM certificate signed, and returned back to it in one step. This skips over a bunch of the rigmarole in getting a push certificate.
+*Profile Manager* is Apple's reference MDM product (or proof-of-concept, depending on how jaded you are about it). It's bundled with [macOS Server.app](https://itunes.apple.com/us/app/macos-server/id883878097?mt=12) for US$20 and requires macOS (or a VM running it). It has a neat feature where with only an Apple ID it can submit a certificate request to Apple, have an MDM certificate signed, and returned back to it in one step. This skips over a bunch of the rigmarole in getting a push certificate.
 
 This technique was probably first documented in 2011 as a part of [David Shuetz Black Hat 2011 presentation "Inside Apple’s MDM Black Box."](https://www.youtube.com/watch?v=OifARLlRMyU). [Page seven of his PDF](https://media.blackhat.com/bh-us-11/Schuetz/BH_US_11_Schuetz_InsideAppleMDM_WP.pdf) documents exporting the PKCS#12 certificate & key from Keychain Access.app once you've [turned on Profile Manager](https://help.apple.com/serverapp/mac/5.3/#/apd05B9B761-D390-4A75-9251-E9AD29A61D0C). The [MicroMDM Quickstart guide](https://github.com/micromdm/micromdm/wiki/Quickstart#getting-an-mdm-push-certificate) also has some documentation on getting at this certificate.
 
@@ -53,18 +53,18 @@ Once the Profile Manager certificate is exported as a `.p12` file it can be used
 
 ### Method C: Sign up for mdmcert.download
 
-[mdmcert.download](https://mdmcert.download/) is a service created to issue MDM push certificates to organizations desiring to run open-source MDM solutions. The certificates are free of cost but per Apple only *organizations* (and not individuals) may request a certificate. A part of that requirement is the need to gather some information like business name, email addresses, etc. and of course agree to some terms.
+[mdmcert.download](https://mdmcert.download/) is a service created to issue MDM push certificates to organizations desiring to run open-source MDM solutions. The certificates are free of cost but per Apple, only *organizations* (and not individuals) may agree to request a certificate. Apple also requires gathering some information like business name, email addresses, etc. That may not be something you're willing to share or legally able to do for your organization.
 
-That said it offers what I would call an easier-than-using-MDM Vendor certificate method to get push certificates, but not quite as easy as the Server.app method. And of course it's free.
+That said it offers what I would call an easier-than-using-MDM Vendor certificate method to get push certificates, but isn't quite as easy as the Server.app method. As mentioned above it's free, too.
 
-MicroMDM's [certhelper](https://github.com/micromdm/tools) tool can be used to request an mdmcert.download APNs certificate when following the [mdmcert.download instructions](https://mdmcert.download/instructions). Once certhelper decrypts the encrypted CSR request (and is subsequently uploaded to [identity.apple.com](https://idmsa.apple.com/) and then the certificate downloaded) the push certificates can be directly used with MicroMDM.
+MicroMDM's [certhelper](https://github.com/micromdm/tools) tool can be used to request an mdmcert.download APNs certificate when following the [mdmcert.download instructions](https://mdmcert.download/instructions). Once certhelper decrypts the encrypted CSR request (which is then subsequently uploaded to [identity.apple.com](https://idmsa.apple.com/) in order to retrieve the certificate) the push certificates you download can be directly used with MicroMDM.
 
 ## Push certificate gotchas
 
-Once you have an MDM APNs certificate you may then send push notifications to devices that are enrolled in your MDM. But there are a couple of gotchas and things you want to take note of or keep in mind:
+Once you have an MDM APNs certificate you have the ability to send push notifications to devices that are enrolled in your MDM. But there are a couple of caveats that you want to keep in mind:
 
 * MDM APNs certificates **expire yearly.** This of course means you'll need to renew the certificate with a similar process you followed to get the original certificate. Note that it **must be a renewal** and not a *new* APNs push certificate for a very important reason:
-* The APNs Push "topic" (which is embedded in the push certificate and has a `com.apple.mgmt.` prefix for MDM) **can never change for the life of a device's enrollment.** Basically, this means a couple things:
+* The APNs Push "topic" (which is embedded in the push certificate and has a `com.apple.mgmt.` prefix for MDM) **can never change during the life of a device's enrollment.** Basically, this means a couple things:
   * You can't just use *any* MDM APNs certificate; they're not interchangeable. When devices enroll into an MDM they are tied to that particular APNs certificate push topic.
   * This is why a *new* certificate can't be used as a renewal — said new certificate would have a different Push topic and would not be able to be used for sending push notifications to your existing enrolled devices. When you renew the certificate on identity.apple.com it must be submitted as a Renewal to a previously created certificate. This doesn't mean you have to use the same private key (which is bad practice), just that it is submitted as a renewal to Apple.
   * If you're using the Server.app extraction method you'll want to keep that instance of Server.app (computer/VM) around so that you can fire it up to get the push certificate with the same topic renewed and exracted again. But hopefully you're only using that method as a test and not necessarily as your production MDM certificate.
@@ -76,40 +76,40 @@ An MDM device enrolls with an identity certificate & key pair. This certificate 
 
 The former is done by embedding a PKCS#12 profile payload in the enrollment profile. This will become the device's identity certificate. The latter is done by the device by itself using the SCEP protocol to request a certificate to be signed. Using the SCEP protocol, for all its faults, is much more secure for a few reasons:
 
-1. The private key is not transferred over the network like the 'embedded' method
-2. The private key is not hanging around in an enrollment profile which may be inadvertantly exported, shared, or lost
+1. The private key is not transferred over the network. Using the 'embedded' method it is.
+2. The private key is not in an enrollment profile on disk in a Download folder which may be inadvertantly exported, shared, or lost. If the identity is compromised you can essentially spoof the device connecting to the MDM server.
 3. Each device has a unique certificate and private key generated for it to use.
 
-The primary use of this device identity certificate is to authenticate the device to the MDM server whenever an HTTPS connection is made. Depending on how the MDM software is configured and how the enrollment profile are setup the device either performs [TLS/SSL client authentication](https://en.wikipedia.org/wiki/Client_certificate) or it provides a [CMS](https://en.wikipedia.org/wiki/Cryptographic_Message_Syntax) detached signature of the MDM request using its identity key pair. In either case this cryptographically proves that the device is using a certificate that should be known to the MDM server.
+The primary use of this device identity certificate is to authenticate the device to the MDM server whenever an HTTPS connection is made. Depending on how the MDM software and enrollment profile are configured the device either performs [TLS/SSL client authentication](https://en.wikipedia.org/wiki/Client_certificate) or it provides a [CMS](https://en.wikipedia.org/wiki/Cryptographic_Message_Syntax) detached signature of the MDM request using its identity key pair. In either case, this cryptographically proves that the device is using a certificate that should be known to the MDM server.
 
-In the case of SCEP you likely will never have to touch the identity certificate manually. It automatically enrolls and references the correct certificate. Older versions of MicroMDM and e.g. Project-iMAS required manually providing the device identity certificate & key pair in the enrollment profile but that's no longer needed (nor recommended).
+In the case of SCEP you likely will never have to touch the identity certificate manually. It automatically enrolls and references the correct certificate. Older versions of MicroMDM and e.g. Project-iMAS required manually providing the device identity certificate & key pair in the enrollment profile but that's no longer needed, or recommended.
 
 It is also possible to use this certificate to encrypt profiles to a device (and only that specific device in the case of unique per-device certificates). More on that later.
 
 ## Device Identity Certificate Authority
 
-When using SCEP the device will be issued a certificate from a Certificate Authority (CA). Similarly with embedded-profile device identity certificates they're probably being generated from a CA, too (though they can be self-signed). This usually implies a certificate chain. While not something you may be hands-on managing for MDM it's brought up here to spark a few questions in your environment:
+When using SCEP the device will be issued a certificate from a Certificate Authority (CA). While embedded-profile device identity certificates can also be issued from a CA (this is what [Commandment MDM](https://github.com/jessepeterson/commandment) does for example) they're likely just self-signed. Having a CA implies a certificate chain and associated trust concerns they bring. While not something you may be hands-on managing for MDM these are a few questions and concerns you'll want to think about when deploying your MDM:
 
-* Where are your device identity certificates getting issued from (which CA)?
+* Where are your device identity certificates getting issued from, which CA?
 * How do you trust this CA? Who owns/operates it?
-* How do you *revoke* certificates for compromised devices or lost certificate/key pairs?
-* How is the MDM trusting the provided device certificate? Is it merely trusting that the *issuer* issued this certificate? Or is it verifying the actual device identity certificate itself?
+* How do you *revoke* certificates for compromised devices or lost certificate & private key pairs?
+* How is the MDM trusting the provided device certificate? Is it merely trusting that the *issuer* issued this certificate? Or is it verifying the contents of the device identity certificate itself?
 
-In MicroMDM the SCEP CA is built-in using the [micromdm/scep](https://github.com/micromdm/scep) project. It verifies — on each MDM check-in and MDM command — that the certificate was issued by the built-in SCEP CA. Even so it's good to be knowledgeable about how and where these certificates are issued from and trusted.
+In MicroMDM the SCEP CA is built-in using the [micromdm/scep](https://github.com/micromdm/scep) project. On each MDM check-in and MDM command it verifies that the certificate was issued by the built-in SCEP CA. Even with the aid of well-designed and straightforward SCEP systems that work with minimal configuration, it is good to understand where device certificates are issued from, how they actually get issued, and how to verify they are trusted.
 
 # Configuration Profile signing & encrypting certificates
 
-As you probably know [Configuration Profiles](https://developer.apple.com/library/content/featuredarticles/iPhoneConfigurationProfileRef) can be CMS signed and/or encrypted. In order to do those things you must encrypt them to a public key or sign them with a certificate.
+Apple's [Configuration Profiles](https://developer.apple.com/library/content/featuredarticles/iPhoneConfigurationProfileRef) can be CMS signed and/or encrypted. To do that, you must encrypt them with a public key or sign them with a certificate, respectively.
 
-Encrypting a Configuration Profile that's destined for a device requires using a public key for which that device has the private key to. This can be known through sending a SCEP profile, a certificate profile payload, or just using the device's enrollment identity already on the device once it's enrolled. When the device has the private key then it can decrypt the encrypted profile and install it. In this way encrypting to the device's specific identity certificate it's possible to encrypt profiles to *just* that device.
+Encrypting a Configuration Profile requires using a public key that the device has the private key to. This can be known through sending a SCEP profile, a certificate profile payload, or just using the device's enrollment identity already on the device once it's enrolled. When the device has the corresponding private key, it can decrypt the encrypted profile and install it. In this way, you can use a device's specific identify certificate to encrypt a profile so that *only the target device* can decrypt them.
 
-Signing a Configuration Profile is also possible. For profile signing to be effective the profile should be signed by a certificate that the device trusts. This can be a certificate in the device's [trusted root store](https://en.wikipedia.org/wiki/Public_key_certificate#Root_programs) (similar to a browser's trusted root store) or it can be a certificate that the device is separately configured to trust. In the case of MDM we likely already have a few certificates that are necessarily trusted that we can use. For example the HTTPS web certificate of the MDM may either be trusted in the system root store or be configured as a part of the enrollment profile (say, for a self-signed certificate, more on that later). This may be used to sign profiles (or packages) too. Often though folks will simply sign profiles with their Apple Developer certificate because the signer of those certificates exists in the trusted root store of the device and will work fine.
+Signing a Configuration Profile is also possible. For profile signing to be effective the profile should be signed by a certificate that the device trusts. This can be a certificate in the device's [trusted root store](https://en.wikipedia.org/wiki/Public_key_certificate#Root_programs) (similar to a browser's trusted root store) or it can be a certificate that the device is separately configured to trust. In the case of MDM we likely already have a few certificates that are necessarily trusted that we can use. For example the HTTPS web certificate of the MDM may either be trusted in the system root store or be configured as a part of the enrollment profile (say, for a self-signed certificate, more on that later). This may be used to sign profiles (or packages). Often folks will simply sign profiles with their Apple Developer certificate because the signer of those certificates exists in the trusted root store of the device and will work without further changes or trust management.
 
 Seeing as the trusted certificates on a device may be known to the MDM system (e.g. coming through in the enrollment profile) the possibility exists for the MDM system to sign profiles either on command or in an on-the-fly fashion. MicroMDM itself doesn't yet support profile signing or encrypting but is definitely planned. Pre-encrypted or signed profiles should still work, however.
 
 # Configuration Profile trusted certificates
 
-Configuration Profiles are able to add certificates to the device's trusted store of certificates by using Configuration Profile payloads for certificates. Not only is this valuable in-and-of-itself for normal system administration tasks but also importantly for MDM these certificates can be embedded in the *enrollment profile* such that those certificates will be trusted by the system when the device is enrolled.
+Configuration Profiles are able to add certificates to the trusted store of certificates of a device by using Configuration Profile payloads for certificates. Not only is this valuable in-and-of-itself for normal system administration tasks but also importantly for MDM these certificates can be embedded in the *enrollment profile* such that those certificates will be trusted by the system when the device is enrolled.
 
 This has implications for MDM operation *especially* in the case of using [self-signed certificates](https://en.wikipedia.org/wiki/Self-signed_certificate) for the HTTPS server. By default a self-signed certificate on a normal website would simply not be trusted by a device and it's no different for an MDM server. However if we place the MDM server's self-signed HTTPS certificate inside the enrollment profile then the system will trust it and MDM operation can commence after enrollment. The same goes for profile signing mentioned above.
 
@@ -126,7 +126,7 @@ This means that the types of a certificates you can use are pretty much the same
 
 If self-signed or private CA-signed certificates are used then we must add those certificates to our enrollment profile using the appropriate configuration profile payloads as mentioned above. MicroMDM does this for us.
 
-MDM is intended for mobile devices and as such there's a reasonable assumption it will be running in a place that is accessible from the public internet. While this is not a technical requirement — an MDM server can run behind a firewall or in a private network as long as APNs push notificates can be sent and received — a lot of the more interesting features of MDM like, say, Remote Wipe lose a lot of their luster without it.
+MDM is intended for mobile devices and as such there's a reasonable assumption it will be running in a place that is accessible from the public internet. While this is not a technical requirement — an MDM server can run behind a firewall or in a private network as long as APNs push notifications can be sent and received — a lot of the more interesting features of MDM like, say, Remote Wipe lose a lot of their luster without it.
 
 So by far the easiest TLS/SSL configuration is done with LetsEncrypt. Just make sure your server is publicly accessible on port 443 at a domain name you control. MicroMDM should take care of the rest. That said self-signed & purchased SSL options are supported as well in MicroMDM.
 
