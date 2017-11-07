@@ -2,7 +2,7 @@
 frontpage = true
 author = "Victor Vrantchan"
 date = "2017-11-06T13:04:37+02:00"
-title = "How to troubleshoot your macOS MDM and DEP Enrollments"
+title = "How to troubleshoot your DEP/MDM Enrollments"
 tags = ["mdm", "dep"]
 
 +++
@@ -13,7 +13,7 @@ The [Device Enrollment Program](https://www.apple.com/business/dep/)(DEP) allows
 
 To make the DEP process work, Apple maintains a list of your serial numbers in a server side database. During first boot, the Mac will contact a remote server(`iprofiles.apple.com`) to get an "Activation Record". This record contains the MDM enrollment URL and a few fields that specify Setup Assistant configuration. 
 
-<< TODO Insert Screenshot >>
+{{<figure src="/troubleshoot-mdm/dep_enroll.gif" title="DEP Enrollment Screen" class="screenshot" >}}
 
 In the WWDC session where DEP was introduced, Apple called it an _enrollment optimization_, and to this day, it lives to that characterization. If the setup assistant proceeds past the above screen, the DEP process is done, and the MDM is managing the Mac. At the very least, the enrollment profile should be installed.
 
@@ -39,7 +39,7 @@ How does the activation record hold the enrollment URL for _your_ MDM? That part
 
 As you can see, the Device Enrollment Program is nothing more than a matchmaking API to connect your device to its designated MDM server. I've attempted to summarize the DEP flow in the diagram below.
 
-<< TODO insert pic >>
+{{<figure src="/troubleshoot-mdm/dep_process.png" title="DEP Process" class="screenshot" >}}
 
 # Troubleshooting Steps
 
@@ -84,7 +84,7 @@ My `vfuse` template, which sets the serial number to DEP enabled Mac and uses an
 }
 ```
 
-Build it with `sudo /usr/local/vfuse/vfuse -t dep-hs-groob.json`.
+Build it with `sudo /usr/local/vfuse/vfuse -t dep-hs-groob.json --snapshot`.
 
 _Note_ I really want to stress out that you must snapshot your VM before first boot. Otherwise the activation record is cached, and any changes you make to it on the MDM side, will not be reflected in your VM.
 
