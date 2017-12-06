@@ -1,0 +1,125 @@
+<section class="hero">
+  <h1 class="hero__title">MicroMDM</h1>
+  <h2 class="hero__subtitle">bootstrap your mac deployment</h2>
+  <div class="hero__logo">
+    <img class="hero__logo-image" src="/images/logo.svg" />
+  </div>
+  <p class="hero__text">
+    MicroMDM is an experimental project to build a <a target="_blank" href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html">Mobile Device Management</a>
+    server for Apple devices. Our goal is to create a performant and extensible
+    device management solution for enterprise and education environments.
+  </p>
+  <a class="hero__cta" href="https://github.com/micromdm/micromdm/wiki/Quickstart">Get Started with MicroMDM</a>
+</section>
+
+<section class="documentation">
+  <h1 class="documentation__header">Documentation</h1>
+  <ul class="documentation__items">
+    <li class="documentation__item">
+      <header class="documentation__item-header">
+        <h1 class="documentation__item-title">Get started easily</h1>
+        <img class="documentation__item-image" src="/images/micromdm-docs.svg" />
+      </header>
+      <p class="documentation__item-description">
+        Praesent cursus sollicitudin pretium. Phasellus id massa ac augue
+        lacinia euismod at ac tortor. Quisque id elit ex. Mauris elementum
+        feugiat velit at sollicitudin. Etiam suscipit mauris eu tellus
+        consequat convallis.
+      </p>
+      <a class="documentation__item-cta" href="https://github.com/micromdm/micromdm/wiki/Quickstart">View the Quickstart Guide</a>
+    </li>
+    <li class="documentation__item">
+      <header class="documentation__item-header">
+        <h1 class="documentation__item-title">Join the Community</h1>
+        <img class="documentation__item-image" src="/images/slack-logo.svg" />
+      </header>
+      <p class="documentation__item-description">
+        In elit turpis, facilisis vel lacinia vitae, scelerisque a nulla.
+        Vivamus eget nisl turpis. Nunc tortor quam, volutpat quis leo sit amet,
+        pellentesque tincidunt ante.
+      </p>
+      <a class="documentation__item-cta" href="https://macadmins.herokuapp.com/">Join Us On Slack</a>
+    </li>
+    <li class="documentation__item">
+      <header class="documentation__item-header">
+        <h1 class="documentation__item-title">Contribute to microMDM</h1>
+        <img class="documentation__item-image" src="/images/wiki-logo.svg" />
+      </header>
+      <p class="documentation__item-description">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In posuere
+        felis fringilla nisl cursus, sed feugiat odio consectetur.
+        ellentesque vitae magna sodales nibh pretium facilisis sed eget lacus.
+      </p>
+      <a class="documentation__item-cta" href="https://github.com/micromdm/micromdm/wiki/Contribute">Read the Contribution Guide</a>
+    </li>
+  </ul>
+</section>
+
+<section class="blog-teaser">
+  <h1 class="blog-teaser__header">What's new with MicroMDM?</h1>
+  {{ range first 1 .Data.Pages }}
+    <article class="blog-post">
+      <h1 class="blog-post__title">{{ .Title }}</h1>
+      <p class="blog-post__preview">
+        {{ .Summary }}
+      </p>
+      {{ if .Truncated }}
+      <div class="blog-post__actions">
+        <span class="blog-post__action blog-post__read-more-link">
+          <a href="{{ .RelPermalink }}">Read More…</a>
+        </span>
+        <div class="blog-post__additional-actions">
+          <span class="blog-post__action blog-post__view-all-link">
+            <a href="/blog">View All Articles</a>
+          </span>
+          <span class="blog-post__action blog-post__contribute-link">
+            <a href="#">Contribute An Article</a>
+          </span>
+        </div>
+      </div>
+      {{ end }}
+    </article>
+  {{ end }}
+</section>
+
+<section class="do-more">
+  <h1 class="do-more__header">Do more with MicroMDM</h1>
+  <ul class="do-more__items">
+    <li class="do-more__item">
+      <header class="do-more__item-header">
+        <img class="do-more__item-image" src="/images/api.svg" />
+        <h1 class="do-more__item-title">Check out the API</h1>
+      </header>
+      <p class="do-more__item-description">
+        In elit turpis, facilisis vel lacinia vitae, scelerisque a nulla.
+        Vivamus eget nisl turpis. Nunc tortor quam, volutpat quis leo sit amet,
+        pellentesque tincidunt ante.
+      </p>
+      <a class="do-more__item-cta" href="https://github.com/micromdm/micromdm/wiki/Contribute">Explore the API</a>
+    </li>
+    <li class="do-more__item">
+      <header class="do-more__item-header">
+        <img class="do-more__item-image" src="/images/octocat.svg" />
+        <h1 class="do-more__item-title">Review the Code</h1>
+      </header>
+      <p class="do-more__item-description">
+        Praesent cursus sollicitudin pretium. Phasellus id massa ac augue
+        lacinia euismod at ac tortor.
+      </p>
+      <a class="do-more__item-cta" href="https://github.com/micromdm/micromdm/wiki/Contribute">View the Source Code</a>
+    </li>
+    <li class="do-more__item">
+      <header class="do-more__item-header">
+        <img class="do-more__item-image" src="/images/branch.svg" />
+        <h1 class="do-more__item-title">Contribute to microMDM</h1>
+      </header>
+      <p class="do-more__item-description">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In posuere
+        felis fringilla nisl cursus, sed feugiat odio consectetur.
+        ellentesque vitae magna sodales nibh pretium facilisis sed eget lacus.
+      </p>
+      <a class="do-more__item-cta" href="https://github.com/micromdm/micromdm/wiki/Contribute">Read the Contribution Guide</a>
+    </li>
+  </ul>
+
+</section>

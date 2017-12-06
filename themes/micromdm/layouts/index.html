@@ -1,37 +1,11 @@
-{{ partial "header.html" . }}
-<body>
-    <p>
-    MicroMDM is an experimental project to build a <a href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html">Mobile Device Management</a> server for Apple devices. Our goal is to create a performant and extensible device management solution for enterprise and education environments.
-
-    <h2>News</h2>
-    {{ range first 1 .Data.Pages }}
-            <div class="post">
-                <h3 class="post-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
-				{{ .Summary }}
-                {{ if .Truncated }}
-                <span class="read-more-link"><a href="{{ .RelPermalink }}">Read More…</a></span>
-                {{ end }}
-            </div>
-    {{ end }}
-
-    <h2>Documentation</h2>
-    <ul>
-        <li>The <a href="https://github.com/micromdm/micromdm/wiki/Quickstart">Quickstart</a> has instructions for getting started.</li>
-        <li>The MicroMDM organization on <a href="https://github.com/micromdm">GitHub</a> has the source code for MicroMDM and related repositories.</li>
-        <li>The <a href="https://github.com/micromdm/micromdm/blob/master/CONTRIBUTING.md">contribution guide</a> describes how you can contribute. </li>
-    </ul>
-    </p>
-
-    <h2>Community</h2>
-    <p>
-    The community around open source MDM is small but growing. If you’re interested in the project and looking to chat with other MDM developers(and users), the best place to start is the <a href="https://macadmins.herokuapp.com/">MacAdmins Slack Team</a>. Some of the channels you can join are <code>#micromdm</code>, <code>#dep</code> and <code>#mdm</code>.
-    </p>
-    </p>
-
-    We also maintain a list of related projects, blog posts and talks on the micromdm wiki <a href="https://github.com/micromdm/micromdm/wiki/Links">page</a>.
-
-    </div>
-{{ partial "footer.html" . }}
-</body>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"{{with .Site.LanguageCode}} xml:lang="{{.}}" lang="{{.}}"{{end}}>
+  {{ partial "head.html" . }}
+  <body>
+    <main>
+      {{ partial "navigation.html" . }}
+      {{ partial "home.html" . }}
+    </main>
+    {{ partial "footer.html" . }}
+  </body>
 </html>
-
