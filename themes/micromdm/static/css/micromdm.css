@@ -43,12 +43,11 @@ p {
 }
 
 section {
-  min-width: 1280px;
+  min-width: 100%;
 }
 
 /* Navigation */
 .primary-header {
-  width: 1280px;
   margin: 16px auto;
   padding: 0 40px;
   position: relative;
@@ -58,7 +57,7 @@ section {
   font-size: 16px;
   color: #a8b9cd;
   position: absolute;
-  right: 0;
+  right: 3%;
   top: 15px;
 }
 
@@ -164,6 +163,7 @@ section p {
 }
 
 .documentation {
+  max-width: 97%;
   background-color: #f9f9fb;
   padding: 80px 0;
   margin-top: 48px;
@@ -178,7 +178,6 @@ section p {
 .documentation__items {
   list-style: none;
   padding: 48px 20px;
-  width: 1200px;
   border-radius: 10px;
   background-color: #fff;
   box-shadow: 0 8px 20px 0 rgba(32, 37, 50, 0.14);
@@ -328,7 +327,7 @@ section p {
 }
 
 .do-more__items {
-  width: 1000px;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   margin: 0 auto;
@@ -382,7 +381,7 @@ section p {
 }
 
 .primary-footer__container {
-  width: 1170px;
+  width 100%;
   margin: 0 auto;
   position: relative;
 }
