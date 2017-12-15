@@ -20,7 +20,7 @@
 /* Global */
 body {
   position: relative;
-  font-family: "system";
+  font-family: "system", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   color: #202532;
   margin: 0;
 }
@@ -48,7 +48,7 @@ section {
 
 /* Navigation */
 .primary-header {
-  width: 1280px;
+  min-width: 1200px;
   margin: 16px auto;
   padding: 0 40px;
   position: relative;
@@ -58,7 +58,7 @@ section {
   font-size: 16px;
   color: #a8b9cd;
   position: absolute;
-  right: 0;
+  right: 40px;
   top: 15px;
 }
 
@@ -379,6 +379,7 @@ section p {
   background: #4a9dff;
   color: #fff;
   padding-top: 65px;
+  min-width: 1280px;
 }
 
 .primary-footer__container {
