@@ -7,7 +7,7 @@ tags = ["mdm", "dep"]
 
 +++
 
-The [Device Enrollment Program](https://www.apple.com/business/dep/)(DEP) allows enterprises to configure their Macs to auto-enroll into a Mobile Device Management(MDM) server of their choice. DEP makes it possible to ensure that a new Mac [becomes managed during the unboxing process](https://blog.kolide.com/macos-on-boarding-at-kolide-fab71345986e), reducing the need for Netboot and complex imaging workflows. Of course, as any workflow that depends on the the network, this enrollment process can fail, and it's important for an administrator to know how to troubleshoot it. This article has a few concrete steps that will help a macadmin using any MDM to debug why their enrollment process isn't working. 
+The [Device Enrollment Program](https://www.apple.com/business/dep/)(DEP) allows enterprises to configure their Macs to auto-enroll into a Mobile Device Management(MDM) server of their choice. DEP makes it possible to ensure that a new Mac [becomes managed during the unboxing process](https://blog.kolide.com/macos-on-boarding-at-kolide-fab71345986e), reducing the need for Netboot and complex imaging workflows. Of course, as any workflow that depends on the network, this enrollment process can fail, and it's important for an administrator to know how to troubleshoot it. This article has a few concrete steps that will help a macadmin using any MDM to debug why their enrollment process isn't working. 
 
 # DEP, in brief
 
