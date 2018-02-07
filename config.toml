@@ -1,4 +1,5 @@
 languageCode = "en-us"
 title = "MicroMDM"
 baseurl = "https://micromdm.io/"
+theme = "micromdm"
 canonifyUrls = false
