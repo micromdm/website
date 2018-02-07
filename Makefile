@@ -1,2 +1,2 @@
 serve:
-	hugo server -w
+	hugo serve
