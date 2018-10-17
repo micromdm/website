@@ -1,2 +1,2 @@
 serve:
-	hugo server -t micromdm -w
+	hugo serve
