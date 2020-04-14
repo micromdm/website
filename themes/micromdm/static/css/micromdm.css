@@ -116,6 +116,7 @@ section p {
   margin-top: 100px;
 }
 
+.post ol,
 .post ul {
   font-size: 22px;
   line-height: 1.45;

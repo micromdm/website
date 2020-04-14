@@ -11,6 +11,10 @@
           <br />
           <span class="post-date">Date: {{ .Date.Format "Mon, Jan 2, 2006" }}</span>
           <br />
+          {{ if not (eq .Date .Lastmod) }}
+          <span class="post-date">Updated: {{ .Lastmod.Format "Mon, Jan 2, 2006" }}</span>
+          <br />
+          {{ end }}
           <span class="reading-time">Reading Time: {{ .ReadingTime }} minutes</span>
           {{ end }}
           {{ .Content }}
