@@ -14,6 +14,7 @@ import (
 	"github.com/aws/aws-lambda-go/lambda"
 )
 
+// See "go help importpath" or https://golang.org/cmd/go/#hdr-Remote_import_paths
 var vanityTemplate = template.Must(template.New("vanity.html").Parse(`
 <head>
   <meta name="go-import" content="{{ .Permalink }} git {{ .Repo }}">
