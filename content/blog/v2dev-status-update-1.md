@@ -12,7 +12,7 @@ After announcing the kickoff of a big rewrite last week, I wasn't sure how to ac
 
 I created a new [`v2dev`](https://github.com/micromdm/micromdm/tree/v2dev) git branch which will eventually become the default. I kept the git history up to this point but removed all files except for the LICENSE, and CODE_OF_CONDUCT. Both are essential and unchanged.
 
-Next, I added a new [CONTRIBUTING](https://github.com/micromdm/micromdm/blob/v2dev/CONTRIBUTING.md) document. I tried to make it welcoming to new contributors. If you spot an opportunity to improve it, [let](https://github.com/micromdm/micromdm/issues/new) [me](twitter.com/wikiwalk) [know](https://github.com/micromdm/micromdm/pulls).
+Next, I added a new [CONTRIBUTING](https://github.com/micromdm/micromdm/blob/v2dev/CONTRIBUTING.md) document. I tried to make it welcoming to new contributors. If you spot an opportunity to improve it, [let](https://github.com/micromdm/micromdm/issues/new) [me](https://twitter.com/wikiwalk) [know](https://github.com/micromdm/micromdm/pulls).
 
 ## website/ in the main repository
 
