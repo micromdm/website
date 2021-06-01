@@ -483,3 +483,13 @@ section p {
   font-weight: normal;
   color: #fff;
 }
+
+.post blockquote {
+  background-color: #f9f9f9;
+  border-left: 5px solid #ccc;
+  font-style: italic;
+  margin:0;
+}
+.post blockquote p {
+  padding:0.5em;
+}
