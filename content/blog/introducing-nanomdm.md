@@ -86,7 +86,6 @@ I hope to get more time to create more documentation, guides, tools, etc. for th
 
 I hope to encourage discussion and participation in NanoMDM. There’s few specific things I’d like input on. I've linked to the relevant GitHub Discussions as a place to further discuss these items:
 
-* Discussion/critique X
 * [The MySQL schema](https://github.com/micromdm/nanomdm/discussions/3), specifically columns types and table relationships
 * [PostgreSQL](https://github.com/micromdm/nanomdm/discussions/5) (or, rather, the lack thereof)! There’s a MySQL backend. Care to take a swing at implementing this backend?
 * Help design the (currently missing) [enrollment (device) API](https://github.com/micromdm/nanomdm/discussions/6)
@@ -95,4 +94,4 @@ I hope to encourage discussion and participation in NanoMDM. There’s few speci
 
 NanoMDM’s scope is more limited than MicroMDM and because of this it may be even more difficult for newcomers to get started with—getting MicroMDM v1 itself going is certainly no walk in the park. Low-level MDM is not for everyone. That said the goal of any open source project is to be useful and hopefully see some adoption. To that end I hope folks find NanoMDM useful and I look forward to collaborating with folks on it.
 
-Come join the fun in #nanomdm on the MacAdmins slack and thanks!
+Come join the fun in #nanomdm on the [MacAdmins slack](https://www.macadmins.org/) and thanks!
