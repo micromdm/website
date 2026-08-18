@@ -3,7 +3,7 @@
 
 name = "MicroMDM"
 license = "MIT"
-licenselink = "https://github.com/micromdm/website/blob/master/LICENSE.md"
+licenselink = "https://github.com/micromdm/website/blob/main/LICENSE"
 description = ""
 homepage = "https://micromdm.io/"
 tags = ["", ""]

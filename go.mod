@@ -1,4 +1,4 @@
-module github.com/micromdm/micromdm
+module github.com/micromdm/website
 
 go 1.14
 
