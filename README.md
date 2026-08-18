@@ -1,5 +1,7 @@
 This is the repository for https://micromdm.io
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/71ea86a5-e9a5-4453-934a-ae1fca5e2b5f/deploy-status)](https://app.netlify.com/projects/practical-wescoff-8c179b/deploys)
+
 The website is built with [hugo](https://gohugo.io/). You're welcome to add to it.
 
 # Adding a new blog post

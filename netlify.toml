@@ -6,6 +6,7 @@
 
 [build.environment]
   GO_IMPORT_PATH = "github.com/micromdm/website"
+  HUGO_VERSION = "0.128.2"
 
 [context.production]
   command = "make netlify"

@@ -1,5 +1,5 @@
 .netlify/functions/vanity: netlify-functions/vanity/*.go
-	GOBIN=$(PWD)/.netlify/functions go install ./netlify-functions/vanity
+	CGO_ENABLED=0 GOBIN=$(PWD)/.netlify/functions go install ./netlify-functions/vanity
 
 netlify: .netlify/functions/vanity
 	hugo --gc --minify
