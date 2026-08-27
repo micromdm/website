@@ -1,7 +1,7 @@
 [build]
   base = "."
-  publish = "public/"
-  command = "echo 'default context'"
+  publish = "public"
+  command = "hugo"
   functions = ".netlify/functions"
 
 [build.environment]
