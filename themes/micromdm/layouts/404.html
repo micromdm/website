@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"{{with .Site.LanguageCode}} xml:lang="{{.}}" lang="{{.}}"{{end}}>
+  {{ partial "head.html" . }}
+  <body>
+    <main>
+      {{ partial "navigation.html" . }}
+      <div class="post">
+          <h1>Page not found</h1>
+          <p>The page you're looking for doesn't exist. <a href="/">Go back home</a>.</p>
+      </div>
+    </main>
+    {{ partial "footer.html" . }}
+  </body>
+</html>
