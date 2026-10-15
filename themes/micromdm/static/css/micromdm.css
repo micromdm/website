@@ -501,3 +501,118 @@ section p {
 .header-hidden-anchor:hover a {
   visibility: visible;
 }
+
+/* Code blocks */
+/* Copy/check icons: GitHub Octicons (copy-16, check-16), MIT License. */
+.code-block {
+  margin: 1.5em 0;
+}
+
+.code-block__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 12px;
+  background-color: #eef0f4;
+}
+
+.code-block__lang {
+  font-family: "Menlo", "Monaco", "Consolas", monospace;
+  font-size: 13px;
+  color: #5b6b7f;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.code-block__copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  color: #5b6b7f;
+  padding: 4px;
+  line-height: 0;
+  cursor: pointer;
+}
+
+.code-block__copy::before {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-color: currentColor;
+  -webkit-mask: url("/images/copy-16.svg") center / contain no-repeat;
+  mask: url("/images/copy-16.svg") center / contain no-repeat;
+}
+
+.code-block__copy:hover {
+  color: #1a6fd4;
+}
+
+.code-block__copy--copied {
+  color: #1a7f37;
+}
+
+.code-block__copy--copied::before {
+  -webkit-mask-image: url("/images/check-16.svg");
+  mask-image: url("/images/check-16.svg");
+}
+
+.code-block__copy:focus-visible {
+  outline: 2px solid #1a6fd4;
+  outline-offset: 2px;
+}
+
+.code-block pre:focus-visible {
+  outline: 2px solid #4a9dff;
+  outline-offset: -2px;
+}
+
+@media (forced-colors: active) {
+  .code-block__copy {
+    line-height: normal;
+  }
+
+  .code-block__copy::before {
+    display: none;
+  }
+
+  .code-block__copy::after {
+    content: "Copy";
+  }
+
+  .code-block__copy--copied::after {
+    content: "Copied";
+  }
+}
+
+.code-block pre {
+  margin: 0;
+  padding: 12px;
+  overflow-x: auto;
+  background-color: #272822;
+  color: #f8f8f2;
+}
+
+.code-block code {
+  font-family: "Menlo", "Monaco", "Consolas", monospace;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.post pre {
+  overflow-x: auto;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

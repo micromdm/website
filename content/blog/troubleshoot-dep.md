@@ -21,7 +21,7 @@ Anyone can view what the current activation record for any mac looks like by run
 
 How does the activation record hold the enrollment URL for _your_ MDM? That part is configured by your MDM, by [talking to the API](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/4-Profile_Management/ProfileManagement.html#//apple_ref/doc/uid/TP40017387-CH7-SW6) server at `mdmenrollment.apple.com`. The record that the MDM configures for your device looks roughly like the JSON structure below, which is almost identical in contents to the record your device receives. 
 
-```
+```json
 {
   "profile_name": "(Required) Human readable name.",
   "url": "https://mdm.acme.co/mdm/enroll",
@@ -52,7 +52,7 @@ To enable debug logging for the MDM processes on your Mac, [install this configu
 The `log` utility on macOS 10.12+ allows streaming very detailed logs with the `stream --info --debug` subcommand.
 To filter out MDM specific log message, start by adding the following predicates.
 
-```
+```bash
 log stream --info --debug --predicate 'subsystem contains "com.apple.ManagedClient.cloudconfigurationd"'
 log stream --info --debug --predicate 'processImagePath contains "mdmclient" OR processImagePath contains "storedownloadd"'
 ```
@@ -65,7 +65,7 @@ The way I recommend you test your MDM workflows is by creating a VMWware Fusion 
 
 
 My `vfuse` template, which sets the serial number to DEP enabled Mac and uses an AutoDMG image:
-```
+```json
 {
     "fusion_path": "",
     "source_dmg": "/Users/groob/Desktop/osx-10.13.1-17B48.apfs.dmg",
@@ -94,7 +94,7 @@ Thanks to Owen, we have one more useful [script to share](https://gist.github.co
 
 If you're still using 10.12 or earlier, you can run these steps instead:
 
-```
+```bash
 # Remove indicator that setup assistant has already run
 sudo rm /var/db/.AppleSetupDone
 
