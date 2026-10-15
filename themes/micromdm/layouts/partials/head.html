@@ -23,6 +23,9 @@
     <link rel="stylesheet" href="/css/normalize.css">
     <link rel="stylesheet" href="/css/micromdm.css">
 
+    <!-- JS -->
+    <script src="/js/code-block.js" defer></script>
+
     <!-- RSS -->
     {{ with .OutputFormats.Get "rss" -}}
         {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}

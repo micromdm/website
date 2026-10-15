@@ -21,7 +21,7 @@ Nothing really worked despite me trying this on 10.12, 10.13 and 10.14 betas. Un
 
 Today, a new product key was added to the macOS Software Update catalog. 
 
-```
+```xml
 <key>041-14451</key>
 <dict>
     <key>ServerMetadataURL</key>
@@ -44,7 +44,7 @@ Today, a new product key was added to the macOS Software Update catalog.
 ```
 
 The `.pkg` file includes signed `OSXNotification.bundle` with Info.plist keys like this:
-```
+```xml
 <key>FreeSpaceRequired</key>
 <integer>12000000000</integer>
 <key>HumanReadableName</key>
@@ -66,18 +66,18 @@ Let's see what happens when we follow the update steps via MDM.
 Note, to spare you a lot of XML, I'll be referencing a few shorthand commands for interacting with the MDM. These are some simple wrappers that create cURL requests to the MicroMDM API, and map directly to the documented commands in the spec. You can [find them in the repo](https://github.com/micromdm/micromdm/tree/a230831725f173f779cf7e030a93a71b32e8ab13/tools/api), and combined wth [ngrok](https://github.com/micromdm/micromdm/tree/a230831725f173f779cf7e030a93a71b32e8ab13/tools/ngrok), you can test everything yourself without a production MDM setup. 
 
 1. ScheduleOSUpdateScan -- initiates a software update check. 
-```
+```bash
 ./tools/api/commands/schedule_os_update_scan $udid true
 ```
 
 2. AvailableOSUpdates -- once the scan is completed, we can see available updates.
-```
+```bash
 ./tools/api/commands/available_os_updates $udid
 ```
 
 On a 10.12.6 laptop we see the following:
 
-```
+```xml
 <dict>
     <key>AllowsInstallLater</key>
     <true/>
@@ -109,19 +109,19 @@ Bingo!
 Now we can schedule a OS Update
 
 3. ScheduleOSUpdate for a product key, InstallASAP is the most aggressive install type. 
-```
+```bash
 ./tools/api/commands/schedule_os_update $udid 041-14451 InstallASAP
 ```
 
 4. Issue another Scan, followed by AvailableOSUpdates
-```
+```bash
 ./tools/api/commands/schedule_os_update_scan $udid true
 ./tools/api/commands/available_os_updates $udid
 ```
 
 Now we see a new item. 
 
-```
+```xml
 <dict>
     <key>DownloadSize</key>
     <real>12000000000</real>
@@ -148,11 +148,11 @@ Now we see a new item.
 
 Very strange ProductKey but I'll take it. 
 
-```
+```bash
 ./tools/api/commands/schedule_os_update $udid _OSX_18A391 InstallASAP
 ```
 
-```
+```xml
 <key>ErrorChain</key>
 <array>
     <dict>
@@ -170,11 +170,11 @@ Very strange ProductKey but I'll take it.
 
 Did you catch that? User Approved MDM is not enough. We need a [DEP enrollment](https://bugreport.apple.com/web/). No problem... a few seconds later. 
 
-```
+```bash
 ./tools/api/commands/schedule_os_update $udid _OSX_18A391 NotifyOnly
 ```
 
-```
+```xml
 <key>ErrorChain</key>
 <array>
     <dict>
@@ -192,7 +192,7 @@ Ah sorry for that detour. I wanted to see if `DownloadOnly` and `NotifyOnly` or 
 
 But it's ok:
 
-```
+```xml
 ./tools/api/commands/schedule_os_update $udid _OSX_18A391 InstallASAP
 
 <key>UpdateResults</key>
@@ -210,7 +210,7 @@ But it's ok:
 
 Except nothing happens. I can confirm on the Mac there is no network activity. `AvailableOSUpdates` again. We get:
 
-```
+```xml
 <dict>
     <key>DownloadPercentComplete</key>
     <real>0.0</real>
@@ -230,7 +230,7 @@ I tried this routine about 20 times and nothing was happening. Absolute madness.
 
 And a single availabe option `Restart`. I clicked it, but nothing happened. So I checked `AvailableOSUpdates`:
 
-```
+```xml
 <dict>
 	<key>DownloadPercentComplete</key>
 	<real>1</real>
@@ -245,7 +245,7 @@ And a single availabe option `Restart`. I clicked it, but nothing happened. So I
 
 Another `ScheduleOSUPdate _OSX_18A391`. Another notification to Restart. Clicking the button does nothing. I decided to look at logs:
 
-```
+```text
 2018-10-16 21:09:29.624110-0400 0x51e4     Default     0x8000000000002f1f   112    authd: Succeeded authorizing right 'com.apple.ServiceManagement.daemons.modify' by client '/System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/Resources/storeinstalld' [596] for authorization created by '/System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/Resources/storeinstalld' [596] (12,0)
 2018-10-16 21:09:29.624497-0400 0x51f5     Default     0x8000000000002f1f   596    storeinstalld: (StoreFoundation) [com.apple.commerce.CKLegacy] MajorOSInstallDaemonDelegate: Non-interactive authorization for software install was successful
 2018-10-16 21:09:29.624836-0400 0x51f5     Default     0x8000000000002f1f   596    storeinstalld: (StoreFoundation) [com.apple.commerce.CKLegacy] MajorOSInstallDaemonDelegate: Triggering OS installation via worker connection <NSXPCConnection: 0x7fb93ef11300> connection from pid 448 (uid: 0, gid: 0)
