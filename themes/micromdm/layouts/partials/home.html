@@ -127,24 +127,19 @@
   {{ range ( where .Site.RegularPages "Type" "blog" | first 1 ) }}
     <article class="blog-post">
       <h1 class="blog-post__title">{{ .Title }}</h1>
-      <p class="blog-post__preview">
+      <div class="blog-post__preview">
         {{ .Summary }}
-      </p>
-      {{ if .Truncated }}
+      </div>
       <div class="blog-post__actions">
-        <span class="blog-post__action blog-post__read-more-link">
-          <a href="{{ .RelPermalink }}">Read More…</a>
-        </span>
+      {{ if .Truncated }}
+        <a class="blog-post__read-more-link" href="{{ .RelPermalink }}">Read More…</a>
+      {{ end }}
         <div class="blog-post__additional-actions">
-          <span class="blog-post__action blog-post__view-all-link">
-            <a href="/blog">View All Articles</a>
-          </span>
-          <span class="blog-post__action blog-post__contribute-link">
-            <a href="https://github.com/micromdm/website/tree/main/content/blog">Contribute An Article</a>
-          </span>
+          <a class="blog-post__view-all-link" href="/blog">View All Articles</a>
+          <br />
+          <a class="blog-post__contribute-link" href="https://github.com/micromdm/website/tree/main/content/blog">Contribute An Article</a>
         </div>
       </div>
-      {{ end }}
     </article>
   {{ end }}
 </section>
